@@ -23,7 +23,7 @@ function App() {
       label: "Categories",
       path: "/categories",
       exact: true,
-      content: () => <Categories />
+      content: () => <Categories userId={1} />
     }
   ]
 
