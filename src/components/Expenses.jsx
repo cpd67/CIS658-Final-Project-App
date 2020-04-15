@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { ExpenseList } from './ExpenseList';
+import { apiUrl } from './utils';
 
 export const Expenses = props => {
     const { userId } = props;
-
-    // Get expenses for user, then...
-
-    const expenses = [
-        { 
+    const [expensesList, setExpensesList] = React.useState([
+        {
             id: 1, 
             name: "Test Expense #1",
             amount: 20.00, 
@@ -17,27 +15,16 @@ export const Expenses = props => {
                 name: "Test Category #1"
             }
         },
-        { 
-            id: 2, 
-            name: "Test Expense #2", 
-            amount: 40.00,
-            expense_date: "2020-04-15",
-            category: {
-                id: 1,
-                name: "Test Category #1"
-            }
-        },
-        { 
-            id: 3, 
-            name: "Test Expense #3", 
-            amount: 50.00,
-            expense_date: "2020-04-17",
-            category: {
-                id: 2,
-                name: "Test Category #2"
-            }
-        },
-    ];
+    ]);
+        
+    // Get expenses for user
+    const fetchExpenses = () => {
+        fetch(`${apiUrl}users/${userId}/expenses`
+        ).then(res => res.json()
+        ).then(data => setExpensesList(data));
+    }
 
-    return <ExpenseList expenses={expenses} />;
+    React.useEffect(() => fetchExpenses());
+
+    return <ExpenseList expenses={expensesList} />;
 }

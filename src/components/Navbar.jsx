@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
 
+// https://getbootstrap.com/docs/4.1/components/navbar/
 export const Navbar = props => {
     const { routes } = props;
 
