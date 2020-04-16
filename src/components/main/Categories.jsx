@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { apiUrl } from './utils';
-import { CategoryList } from './CategoryList';
+import { CategoryList } from '../lists/CategoryList';
 
 export const Categories = props => {
     const { userId } = props;

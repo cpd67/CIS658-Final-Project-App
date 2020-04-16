@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ExpenseList } from './ExpenseList';
+import { ExpenseList } from '../lists/ExpenseList';
 import { apiUrl } from './utils';
 
 export const Expenses = props => {

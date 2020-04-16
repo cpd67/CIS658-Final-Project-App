@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
-import { Navbar } from "./components/Navbar";
-import { Categories } from './components/Categories';
-import { Expenses } from './components/Expenses';
+import { Navbar } from "./components/main/Navbar";
+import { Categories } from './components/main/Categories';
+import { Expenses } from './components/main/Expenses';
 
 function App() {
   const routes = [
