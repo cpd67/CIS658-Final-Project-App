@@ -16,7 +16,6 @@ export const App = props => {
 
   const routes = [
     {
-      label: "Money Trail",
       path: "/",
       exact: true,
       content: () => <Expenses user={user} />
@@ -47,7 +46,7 @@ export const App = props => {
         {typeof user.id !== 'undefined' ? (
           <>
             <nav className="navbar navbar-expand navbar-dark bg-success">
-              <a className="navbar-brand" href="#">Money Trail</a>
+              <Link className="navbar-brand" to="/">Money Trail</Link>
               <ul className="navbar-nav">
                 {routes.map((route, index) =>
                   <li className="nav-item" key={index}>
@@ -72,7 +71,7 @@ export const App = props => {
           ) : (
             <>
               <nav className="navbar navbar-expand navbar-dark bg-success">
-                <a className="navbar-brand" href="#">Money Trail</a>
+                <Link className="navbar-brand" to="/">Money Trail</Link>
                 <ul className="navbar-nav">
                   <li className="nav-item">
                     <Link to={'/login'} className="nav-link">Log in</Link>
