@@ -26,7 +26,7 @@ export const LogoutView = props => {
             <div className="col-md-6">
                 <h5>Are you sure you wish to logout?</h5>
                 <button type="button" onClick={() => {logoutUser(); history.push('/');
-                }} className="btn btn-primary">Yes</button>
+                }} className="btn btn-primary mr-2">Yes</button>
                 <button type="button" onClick={() => {// Redirect back to home page
                 }} className="btn btn-secondary">No</button>
             </div>
