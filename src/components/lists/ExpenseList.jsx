@@ -16,7 +16,13 @@ export const ExpenseList = props => {
                 </tr>
             </thead>
             <tbody>
-                {expenses.length > 0 ? expenses.map(expense => <ExpenseListRow key={expense.id} expense={expense} />) : (<tr><td colSpan={5}>You don't have any.</td></tr>)}
+                {expenses.length > 0 ? (
+                    expenses.map(expense => <ExpenseListRow key={expense.id} expense={expense} />)
+                 ) : (
+                    <tr>
+                        <td colSpan={5}>No expenses found. You can add some by clicking on the + button on the top right. </td>
+                    </tr>
+                )}
             </tbody>
         </table>
     )

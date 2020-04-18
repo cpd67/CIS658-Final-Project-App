@@ -7,6 +7,9 @@ import { LoginForm } from './components/forms/LoginForm';
 import { LogoutView } from './components/main/LogoutView';
 import { RouteNotFound } from './components/main/RouteNotFound';
 
+// https://reacttraining.com/react-router/web/example/auth-workflow
+// https://jaredpalmer.com/formik/
+// https://getbootstrap.com/docs/4.0/getting-started/introduction/
 export const App = props => {
   const [user, setUser] = React.useState({});
 

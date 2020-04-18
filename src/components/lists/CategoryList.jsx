@@ -13,7 +13,13 @@ export const CategoryList = props => {
                 </tr>
             </thead>
             <tbody>
-                {categories.length > 0 ? categories.map(category => <CategoryListRow key={category.id} category={category} />) : (<tr><td colSpan={2}>You don't have any.</td></tr>)}
+                {categories.length > 0 ? (
+                    categories.map(category => <CategoryListRow key={category.id} category={category} />)
+                 ) : (
+                    <tr>
+                        <td colSpan={2}>No categories found. You can add some by clicking the + button on the top right. </td>
+                    </tr>
+                )}
             </tbody>
         </table>
     );
