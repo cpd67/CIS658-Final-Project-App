@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { apiUrl } from './utils';
 
 export const LogoutView = props => {
     const { handleLogout } = props;
+    const history = useHistory();
 
     const logoutUser = () => {
         fetch(`${apiUrl}/logout`, {
@@ -23,7 +25,7 @@ export const LogoutView = props => {
         <div className="row">
             <div className="col-md-6">
                 <h5>Are you sure you wish to logout?</h5>
-                <button type="button" onClick={() => {logoutUser(); // Redirect back to the home page
+                <button type="button" onClick={() => {logoutUser(); history.push('/');
                 }} className="btn btn-primary">Yes</button>
                 <button type="button" onClick={() => {// Redirect back to home page
                 }} className="btn btn-secondary">No</button>

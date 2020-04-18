@@ -1,11 +1,12 @@
 import * as React from 'react';
-
+import { useHistory } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+
 import { apiUrl } from '../main/utils';
 
 export const LoginForm = props => {
     const { onSubmit } = props;
-
+    const history = useHistory();
     const initialValues = {username: "", password: ""}
 
     return (
@@ -31,6 +32,7 @@ export const LoginForm = props => {
                         }
                     });
                     formikHelpers.setSubmitting(false);
+                    history.push("/");
                 }}
             >
                 <Form>
