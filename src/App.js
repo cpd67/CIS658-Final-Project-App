@@ -4,6 +4,7 @@ import './App.css';
 import { Expenses } from './components/main/Expenses';
 import { Categories } from './components/main/Categories';
 import { LoginForm } from './components/forms/LoginForm';
+import { SignupForm } from './components/forms/SignupForm';
 import { LogoutView } from './components/main/LogoutView';
 import { RouteNotFound } from './components/main/RouteNotFound';
 
@@ -74,6 +75,9 @@ export const App = props => {
                   <li className="nav-item">
                     <Link to={'/login'} className="nav-link">Log in</Link>
                   </li>
+                  <li className="nav-item">
+                    <Link to={'/signup'} className="nav-link">Sign up</Link>
+                  </li>
                 </ul>
               </nav>
               <Switch>
@@ -86,6 +90,11 @@ export const App = props => {
                     path='/login'
                     exact={true}
                     children={<LoginForm onSubmit={setUser} />}
+                  />
+                  <Route
+                    path="/signup"
+                    exact={true}
+                    children={<SignupForm onSubmit={setUser} />}
                   />
                   <Route path="*" children={<RouteNotFound />} />
               </Switch>
