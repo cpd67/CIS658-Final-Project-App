@@ -3,20 +3,15 @@ import { apiUrl } from './utils';
 import { CategoryList } from '../lists/CategoryList';
 
 export const Categories = props => {
-    const { userId } = props;
-    const [categoriesList, setCategoriesList] = React.useState([
-        {
-            id: 1, 
-            name: 'Category!'
-        },
-    ]);
+    const { user } = props;
+    const [categoriesList, setCategoriesList] = React.useState([]);
     const fetchCategories = () => {
-        fetch(`${apiUrl}users/${userId}/categories`
+        fetch(`${apiUrl}/users/${user.id}/categories`
         ).then(res => res.json()
         ).then(data => setCategoriesList(data));
     }
 
-    React.useEffect(() => fetchCategories());
+    React.useEffect(() => fetchCategories(), [categoriesList.length]);
 
     return <CategoryList categories={categoriesList} />;
 }

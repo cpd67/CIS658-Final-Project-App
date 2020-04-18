@@ -16,7 +16,7 @@ export const ExpenseList = props => {
                 </tr>
             </thead>
             <tbody>
-                {expenses.map(expense => <ExpenseListRow key={expense.id} expense={expense} />)}
+                {expenses.length > 0 ? expenses.map(expense => <ExpenseListRow key={expense.id} expense={expense} />) : (<tr><td colSpan={5}>You don't have any.</td></tr>)}
             </tbody>
         </table>
     )

@@ -3,28 +3,15 @@ import { ExpenseList } from '../lists/ExpenseList';
 import { apiUrl } from './utils';
 
 export const Expenses = props => {
-    const { userId } = props;
-    const [expensesList, setExpensesList] = React.useState([
-        {
-            id: 1, 
-            name: "Test Expense #1",
-            amount: 20.00, 
-            expense_date: "2020-04-13", 
-            category: {
-                id: 1, 
-                name: "Test Category #1"
-            }
-        },
-    ]);
+    const { user } = props;
+    const [expensesList, setExpensesList] = React.useState([]);
         
     // Get expenses for user
     const fetchExpenses = () => {
-        fetch(`${apiUrl}users/${userId}/expenses`
-        ).then(res => res.json()
-        ).then(data => setExpensesList(data));
+        fetch(`${apiUrl}/users/${user.id}/expenses`).then(res => res.json()).then(data => setExpensesList(data));
     }
 
-    React.useEffect(() => fetchExpenses());
+    React.useEffect(() => fetchExpenses(), [expensesList.length]);
 
     return <ExpenseList expenses={expensesList} />;
 }

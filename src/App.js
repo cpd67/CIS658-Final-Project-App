@@ -1,47 +1,97 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
-import { Navbar } from "./components/main/Navbar";
-import { Categories } from './components/main/Categories';
 import { Expenses } from './components/main/Expenses';
+import { Categories } from './components/main/Categories';
+import { LoginForm } from './components/forms/LoginForm';
+import { LogoutView } from './components/main/LogoutView';
+import { RouteNotFound } from './components/main/RouteNotFound';
 
-function App() {
+export const App = props => {
+  const [user, setUser] = React.useState({});
+
   const routes = [
     {
       label: "Money Trail",
       path: "/",
       exact: true,
-      content: () => <Expenses userId={1} />
+      content: () => <Expenses user={user} />
     },
     {
       label: "Expenses",
       path: "/expenses",
       exact: true,
-      content: () => <Expenses userId={1} />
+      content: () => <Expenses user={user} />
     },
     {
       label: "Categories",
       path: "/categories",
       exact: true,
-      content: () => <Categories userId={1} />
+      content: () => <Categories user={user} />
+    },
+    {
+      label: "Logout",
+      path: "/log-out",
+      exact: true,
+      content: () => <LogoutView handleLogout={() => setUser({})}/>
     }
-  ]
+  ];
 
   return (
     <Router>
-        <Navbar routes={routes} />
-        <Switch>
-          {routes.map((route, index) =>
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              children={route.content}
-            />
-          )}
-        </Switch>
+      <div className="container-fluid">
+        {typeof user.id !== 'undefined' ? (
+          <>
+            <nav className="navbar navbar-expand navbar-dark bg-success">
+              <ul className="navbar-nav">
+                {routes.map((route, index) =>
+                  <li className="nav-item" key={index}>
+                    <Link to={route.path} className="nav-link">{route.label}</Link>
+                  </li>
+                  )
+                }
+              </ul>
+            </nav>
+            <Switch>
+              {routes.map((route, index) =>
+                <Route
+                  key={index}
+                  path={route.path}
+                  exact={route.exact}
+                  children={route.content}
+                />
+              )}
+              <Route path="*" children={<RouteNotFound />} />
+            </Switch>
+          </>
+          ) : (
+            <>
+              <nav className="navbar navbar-expand navbar-dark bg-success">
+                <ul className="navbar-nav">
+                  <li className="nav-item">
+                    <Link to={'/login'} className="nav-link">Log in</Link>
+                  </li>
+                </ul>
+              </nav>
+              <Switch>
+                  <Route
+                    path="/"
+                    exact={true}
+                    children={<p>You must login to view any content.</p>}
+                  />
+                  <Route
+                    path='/login'
+                    exact={true}
+                    children={<LoginForm onSubmit={setUser} />}
+                  />
+                  <Route path="*" children={<RouteNotFound />} />
+              </Switch>
+            </>
+          )
+        }
+      </div>
     </Router>
-  )
+    )
 }
 
 export default App;
