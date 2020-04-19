@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ExpenseListRow } from './ExpenseListRow';
 
 export const ExpenseList = props => {
-    const { expenses } = props;
+    const { expenses, onEdit, onDelete } = props;
 
     return (
         <table className="table table-sm table-striped table-hover">
@@ -17,13 +17,13 @@ export const ExpenseList = props => {
             </thead>
             <tbody>
                 {expenses.length > 0 ? (
-                    expenses.map(expense => <ExpenseListRow key={expense.id} expense={expense} />)
+                    expenses.map(expense => <ExpenseListRow key={expense.id} expense={expense} onEdit={onEdit} onDelete={onDelete} />)
                  ) : (
                     <tr>
-                        <td colSpan={5}>No expenses found. You can add some by clicking on the + button on the top right.</td>
+                        <td colSpan={5}>No expenses found. You can add one by filling out the form below.</td>
                     </tr>
                 )}
             </tbody>
         </table>
-    )
+    );
 }

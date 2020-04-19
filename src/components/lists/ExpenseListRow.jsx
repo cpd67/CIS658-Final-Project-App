@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { useRouteMatch } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 export const ExpenseListRow = props => {
-    const { expense } = props;
-    let { url } = useRouteMatch();
+    const { expense, onEdit, onDelete } = props;
 
     return (
         <tr>
@@ -14,7 +11,8 @@ export const ExpenseListRow = props => {
             <td>{expense.category ? expense.category.name : "-"}</td>
             <td>
                 <div className="btn-group btn-group-sm">
-                    <Link to={`${url}/edit/${expense.id}`} className="btn btn-secondary">Edit</Link>
+                    <button type="button" onClick={(e) => {onEdit(expense)}} className="btn btn-secondary">Edit</button>
+                    <button type="button" onClick={(e) => onDelete(expense.id)} className="btn btn-danger">Delete</button>
                 </div>
             </td>
         </tr>
