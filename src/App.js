@@ -6,12 +6,14 @@ import { Categories } from './components/main/Categories';
 import { LoginForm } from './components/forms/LoginForm';
 import { SignupForm } from './components/forms/SignupForm';
 import { LogoutView } from './components/main/LogoutView';
+import { ExpenseChart } from './components/main/ExpenseChart';
 import { RouteNotFound } from './components/main/RouteNotFound';
 import { apiUrl } from './components/main/utils';
 
 // https://reacttraining.com/react-router/web/example/auth-workflow
 // https://jaredpalmer.com/formik/
 // https://getbootstrap.com/docs/4.0/getting-started/introduction/
+// https://www.chartjs.org/
 export const App = props => {
   const [user, setUser] = React.useState({});
 
@@ -31,6 +33,12 @@ export const App = props => {
       path: "/categories",
       exact: true,
       content: () => <Categories user={user} />
+    },
+    {
+      label: "Track",
+      path: "/track",
+      exact: true,
+      content: () => <ExpenseChart user={user} />
     },
     {
       label: "Logout",
