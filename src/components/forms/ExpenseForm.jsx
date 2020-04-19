@@ -21,9 +21,19 @@ export const ExpenseForm = props => {
                 <input type="text" className="form-control" name="expense_date" value={expense.expense_date} onChange={(e) => onEditExpense('expense_date', e.target.value)} />
             </div>
             <div className="form-group">
-                <label htmlFor="categoryId">Category</label>
-                <select type="select" className="form-control" name="categoryId" value={expense.category ? expense.category.id : -1}
-                        onChange={(e) => {onEditExpense('category', e.target.value > 0 ? {id: e.target.value, name: categories[e.target.value - 1].name} : {})}}
+                <label htmlFor="category">Category</label>
+                <select type="select" className="form-control" name="category" value={expense.category ? expense.category.id : 0}
+                    onChange={(e) => {
+                        // Update Expense Category
+                        let newCat = {id: 0, name: "-"}
+                        if(e.target.value > 0) {
+                            // Find the category from our list and set the Expense Category to be that
+                            let catIndex = categories.findIndex(category => category.id == e.target.value);
+                            const cat = categories[catIndex];
+                            newCat = {id: cat.id, name: cat.name};
+                        }
+                        onEditExpense('category', newCat);
+                    }}
                 >
                     <option value={0}>-------------------------</option>
                     {categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)}

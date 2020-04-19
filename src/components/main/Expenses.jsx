@@ -33,8 +33,10 @@ export const Expenses = props => {
             expense_date: newExpense.expense_date,
             user_id: newExpense.user_id
         }
-        if(newExpense.category) {
+        if(newExpense.category && newExpense.category.id > 0) {
             newData['category_id'] = newExpense.category.id;
+        } else {
+            newData['category_id'] = null;
         }
 
         fetch(`${apiUrl}/users/${user.id}/expenses`, {
@@ -60,8 +62,10 @@ export const Expenses = props => {
             expense_date: updatedExpense.expense_date,
             user_id: updatedExpense.user_id
         }
-        if(updatedExpense.category) {
+        if(updatedExpense.category && updatedExpense.category.id > 0) {
             updateData['category_id'] = updatedExpense.category.id;
+        } else {
+            updateData['category_id'] = null;
         }
 
         fetch(`${apiUrl}/users/${user.id}/expenses/${updatedExpense.id}`, {
