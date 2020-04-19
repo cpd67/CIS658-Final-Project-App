@@ -10,15 +10,15 @@ export const ExpenseForm = props => {
         }}>
             <div className="form-group">
                 <label htmlFor="name">Expense Name</label>
-                <input type="text" className="form-control" name="name" value={expense.name} onChange={(e) => onEditExpense('name', e.target.value)}/>
+                <input type="text" className="form-control" name="name" value={expense.name} onChange={(e) => onEditExpense('name', e.target.value)} required/>
             </div>
             <div className="form-group">
                 <label htmlFor="name">Amount</label>
-                <input type="number" className="form-control" name="amount" value={expense.amount} onChange={(e) => onEditExpense('amount', e.target.value)} />
+                <input type="number" className="form-control" name="amount" value={expense.amount} onChange={(e) => onEditExpense('amount', e.target.value)} required />
             </div>
             <div className="form-group">
                 <label htmlFor="expense_date">Date of Expense</label>
-                <input type="text" className="form-control" name="expense_date" value={expense.expense_date} onChange={(e) => onEditExpense('expense_date', e.target.value)} />
+                <input type="date" className="form-control" name="expense_date" value={expense.expense_date} onChange={(e) => onEditExpense('expense_date', e.target.value)} required />
             </div>
             <div className="form-group">
                 <label htmlFor="category">Category</label>
