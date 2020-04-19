@@ -7,6 +7,7 @@ import { LoginForm } from './components/forms/LoginForm';
 import { SignupForm } from './components/forms/SignupForm';
 import { LogoutView } from './components/main/LogoutView';
 import { RouteNotFound } from './components/main/RouteNotFound';
+import { apiUrl } from './components/main/utils';
 
 // https://reacttraining.com/react-router/web/example/auth-workflow
 // https://jaredpalmer.com/formik/
@@ -38,6 +39,19 @@ export const App = props => {
       content: () => <LogoutView handleLogout={() => setUser({})}/>
     }
   ];
+
+  const fetchLoginStatus = () => {
+    fetch(`${apiUrl}/logged_in`, {
+      method: 'GET',
+      credentials: 'include'
+    }).then(res => res.json()).then(data => {
+      if(data.logged_in) {
+        setUser(data.user);
+      }
+    });
+  }
+
+  React.useEffect(() => fetchLoginStatus(), []);
 
   return (
     <Router>
