@@ -2,6 +2,7 @@ import * as React from 'react';
 import Chart from "chart.js";
 import { apiUrl, transformExpenseData } from './utils';
 
+// https://blog.bitsrc.io/customizing-chart-js-in-react-2199fa81530a
 export const ExpenseChart = props => {
     const { user } = props;
     const chartRef = React.useRef(null);
@@ -32,7 +33,10 @@ export const ExpenseChart = props => {
 
             new Chart(chart, {
                 type: "line",
-                data: chartData
+                data: chartData,
+                options: {
+                    responsive: true
+                }
             });
         });
     };
@@ -40,6 +44,9 @@ export const ExpenseChart = props => {
     React.useEffect(() => fetchExpenses(), [chartRef]);
 
     return (
-        <canvas id="expenseChart" ref={chartRef}></canvas>
+        // Response chart: https://www.chartjs.org/docs/latest/general/responsive.html#important-note
+        <div className="chart-container">
+            <canvas id="expenseChart" ref={chartRef}></canvas>
+        </div>
     );
 }

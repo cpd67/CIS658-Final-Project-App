@@ -1,5 +1,3 @@
-import { Expenses } from "./Expenses";
-
 export const apiUrl = "http://localhost:3001";
 
 export const transformExpenseData = expenses => {
