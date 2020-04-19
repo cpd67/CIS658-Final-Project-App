@@ -84,7 +84,7 @@ export const App = props => {
                   <Route
                     path="/"
                     exact={true}
-                    children={<p>Hey there! Log in or signup using the buttons in the top nav bar.</p>}
+                    children={<p>Hey there! Log in or sign up using the buttons in the top nav bar.</p>}
                   />
                   <Route
                     path='/login'
