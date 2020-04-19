@@ -15,7 +15,6 @@ export const LoginForm = props => {
             <Formik
                 initialValues={initialValues}
                 onSubmit={(values, formikHelpers) => {
-                    let redirect = false;
                     fetch(`${apiUrl}/login`, {
                         method: 'POST',
                         headers: {
@@ -30,13 +29,10 @@ export const LoginForm = props => {
                             console.log(data.errors);
                         } else {
                             onSubmit(data.user);
-                            redirect = true;
+                            history.push("/");
                         }
                     });
                     formikHelpers.setSubmitting(false);
-                    if(redirect) {
-                        history.push("/");
-                    }
                 }}
             >
                 <Form>

@@ -20,7 +20,7 @@ export const ExpenseList = props => {
                     expenses.map(expense => <ExpenseListRow key={expense.id} expense={expense} />)
                  ) : (
                     <tr>
-                        <td colSpan={5}>No expenses found. You can add some by clicking on the + button on the top right. </td>
+                        <td colSpan={5}>No expenses found. You can add some by clicking on the + button on the top right.</td>
                     </tr>
                 )}
             </tbody>

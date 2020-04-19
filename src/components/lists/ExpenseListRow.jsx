@@ -1,22 +1,20 @@
 import * as React from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const ExpenseListRow = props => {
     const { expense } = props;
+    let { url } = useRouteMatch();
 
     return (
         <tr>
             <td>{expense.name}</td>
             <td>{expense.amount}</td>
             <td>{expense.expense_date}</td>
-            <td>{expense.category.name}</td>
+            <td>{expense.category ? expense.category.name : "-"}</td>
             <td>
                 <div className="btn-group btn-group-sm">
-                    <button className="btn btn-secondary" onClick={(e) => console.log('Flappy Edit!')}>
-                        Edit
-                    </button>
-                    <button className="btn btn-danger" onClick={(e) => console.log('Flappy Delete')}>
-                        Delete
-                    </button>
+                    <Link to={`${url}/edit/${expense.id}`} className="btn btn-secondary">Edit</Link>
                 </div>
             </td>
         </tr>

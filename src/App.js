@@ -18,12 +18,11 @@ export const App = props => {
     {
       path: "/",
       exact: true,
-      content: () => <Expenses user={user} />
+      content: () => <p>Welcome! Click on the links above to view your information.</p>
     },
     {
       label: "Expenses",
       path: "/expenses",
-      exact: true,
       content: () => <Expenses user={user} />
     },
     {

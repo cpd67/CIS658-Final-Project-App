@@ -18,9 +18,7 @@ export const SignupForm = props => {
     return (
         <Formik initialValues={initialValues}
                 onSubmit={(values, formikHelpers) => {
-                    let redirect = false;
                     fetch(`${apiUrl}/users`, {
-                        method: 'POST',
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -31,16 +29,13 @@ export const SignupForm = props => {
                     }).then(res => res.json()).then(data => {
                         if(data.user) {
                             onSubmit(data.user);
-                            redirect = true;
+                            history.push("/");
                         } else {
                             console.error("Somthing went wrong!");
                             console.error(data);
                         }
                     });
                     formikHelpers.setSubmitting(false);
-                    if(redirect) {
-                        history.push("/");
-                    }
                 }}
         >
             <Form>
