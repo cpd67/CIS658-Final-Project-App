@@ -109,7 +109,7 @@ export const Expenses = props => {
     return (
         <>
             <ExpenseList expenses={expensesList} onEdit={onEdit} onDelete={deleteExpense} />
-            <ExpenseForm user={user} expense={currentExpense}
+            <ExpenseForm expense={currentExpense}
                 onSubmit={formMode === 'new' ? createExpense : editExpense} categories={categories}
                 onEditExpense={onEditExpense}
             />
