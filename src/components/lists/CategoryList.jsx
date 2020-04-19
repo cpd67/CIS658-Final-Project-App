@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CategoryListRow } from './CategoryListRow';
 
 export const CategoryList = props => {
-    const { categories } = props;
+    const { categories, onEdit, onDelete } = props;
 
     return (
         <table className="table table-sm table-striped table-hover">
@@ -14,10 +14,10 @@ export const CategoryList = props => {
             </thead>
             <tbody>
                 {categories.length > 0 ? (
-                    categories.map(category => <CategoryListRow key={category.id} category={category} />)
+                    categories.map(category => <CategoryListRow key={category.id} category={category} onEdit={onEdit} onDelete={onDelete} />)
                  ) : (
                     <tr>
-                        <td colSpan={2}>No categories found. You can add some by clicking the + button on the top right. </td>
+                        <td colSpan={2}>No categories found. You can add one by filling out the form below.</td>
                     </tr>
                 )}
             </tbody>
