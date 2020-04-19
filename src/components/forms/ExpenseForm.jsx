@@ -28,6 +28,7 @@ export const ExpenseForm = props => {
                         let newCat = {id: 0, name: "-"}
                         if(e.target.value > 0) {
                             // Find the category from our list and set the Expense Category to be that
+                            // Use == instead of === to implicity convert value from string to int
                             let catIndex = categories.findIndex(category => category.id == e.target.value);
                             const cat = categories[catIndex];
                             newCat = {id: cat.id, name: cat.name};

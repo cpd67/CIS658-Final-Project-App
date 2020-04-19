@@ -13,7 +13,6 @@ export const Expenses = props => {
     const fetchCategories = () => {
         fetch(`${apiUrl}/users/${user.id}/categories`).then(res => res.json()).then(data => {
             if(data) {
-                console.log(data);
                 setCategories(data);
             }
         });
