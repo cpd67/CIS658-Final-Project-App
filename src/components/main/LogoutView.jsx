@@ -11,14 +11,15 @@ export const LogoutView = props => {
             <div className="col-md-6">
                 <h5>Are you sure you wish to logout?</h5>
                 <button type="button" onClick={() => {
-                    API.logoutUser(handleLogout).then(data => {
+                    API.logoutUser().then(data => {
                         if(data.status === 200) {
                             console.log(data);
+                            handleLogout();
+                            history.push('/');
                         } else {
                             console.error('Something went wrong!');
                         }
                     });
-                    history.push('/');
                 }} className="btn btn-primary mr-2">Yes</button>
                 <button type="button" onClick={() => {history.push('/')}} className="btn btn-secondary">No</button>
             </div>
