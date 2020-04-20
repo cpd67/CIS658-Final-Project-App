@@ -1,4 +1,4 @@
-export const apiUrl = "http://localhost:3001";
+export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://money-trail-api.herokuapp.com/' : "http://localhost:3001";
 
 export default class API {
     static fetchExpenses(user) {
