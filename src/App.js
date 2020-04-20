@@ -10,11 +10,6 @@ import { ExpenseChart } from './components/main/ExpenseChart';
 import { RouteNotFound } from './components/main/RouteNotFound';
 import API from './components/main/API';
 
-
-// https://reacttraining.com/react-router/web/example/auth-workflow
-// https://jaredpalmer.com/formik/
-// https://getbootstrap.com/docs/4.0/getting-started/introduction/
-// https://www.chartjs.org/
 export const App = props => {
   const [user, setUser] = React.useState({});
 
