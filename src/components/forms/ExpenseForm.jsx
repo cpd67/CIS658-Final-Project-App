@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export const ExpenseForm = props => {
-    const { expense, onEditExpense, onSubmit, categories } = props;
+    const { expense, onEditExpense, onSubmit, categories, onClear } = props;
 
     return (
         <form onSubmit={(e) => {
@@ -41,6 +41,7 @@ export const ExpenseForm = props => {
                 </select>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-secondary" onClick={(e) => { e.preventDefault(); onClear(); }}>Clear</button>
         </form>
     );
 }

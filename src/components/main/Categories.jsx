@@ -5,7 +5,8 @@ import { CategoryList } from '../lists/CategoryList';
 
 export const Categories = props => {
     const { user } = props;
-    const [currentCategory, setCurrentCategory] = React.useState({});
+    const defaultCategory = {name: ""}
+    const [currentCategory, setCurrentCategory] = React.useState(defaultCategory);
     const [formMode, setFormMode] = React.useState('new');
     const [categoriesList, setCategoriesList] = React.useState([]);
 
@@ -57,11 +58,15 @@ export const Categories = props => {
             }
         });
     }
+    const onClear = () => {
+        setFormMode('new');
+        setCurrentCategory(defaultCategory);
+    }
 
     return (
         <>
             <CategoryList categories={categoriesList} onEdit={onEdit} onDelete={onDelete} />
-            <CategoryForm category={currentCategory} onSubmit={onSubmit} onEditCategory={onEditCategory} />
+            <CategoryForm category={currentCategory} onSubmit={onSubmit} onEditCategory={onEditCategory} onClear={onClear} />
         </>
     );
 }

@@ -6,7 +6,8 @@ import API from '../main/API';
 export const Expenses = props => {
     const { user } = props;
     const [expensesList, setExpensesList] = React.useState([]);
-    const [currentExpense, setCurrentExpense] = React.useState({});
+    const defaultExpense = {name: "", amount: 0.00, expense_date: ""}
+    const [currentExpense, setCurrentExpense] = React.useState(defaultExpense);
     const [formMode, setFormMode] = React.useState('new');
     const [categories, setCategories] = React.useState([]);
 
@@ -65,11 +66,15 @@ export const Expenses = props => {
             }
         });
     }
+    const onClear = () => {
+        setFormMode('new');
+        setCurrentExpense(defaultExpense);
+    }
 
     return (
         <>
             <ExpenseList expenses={expensesList} onEdit={onEdit} onDelete={onDelete} />
-            <ExpenseForm expense={currentExpense} categories={categories} onSubmit={onSubmit} onEditExpense={onEditExpense} />
+            <ExpenseForm expense={currentExpense} categories={categories} onSubmit={onSubmit} onEditExpense={onEditExpense} onClear={onClear} />
         </>
     );
 }
