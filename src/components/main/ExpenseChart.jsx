@@ -1,14 +1,16 @@
 import * as React from 'react';
 import Chart from "chart.js";
-import { apiUrl, transformExpenseData } from './utils';
+import { transformExpenseData } from './utils';
+import API from './API';
 
 // https://blog.bitsrc.io/customizing-chart-js-in-react-2199fa81530a
+// https://stackoverflow.com/questions/54620698/whats-the-difference-between-useref-and-createref
 export const ExpenseChart = props => {
     const { user } = props;
     const chartRef = React.useRef(null);
 
-    const fetchExpenses = () => {
-        fetch(`${apiUrl}/users/${user.id}/expenses`).then(res => res.json()).then(data => {
+    React.useEffect(() => {
+        API.fetchExpenses(user).then(data => {
             const chart = chartRef.current.getContext("2d");
             
             let chartData = {
@@ -39,9 +41,7 @@ export const ExpenseChart = props => {
                 }
             });
         });
-    };
-
-    React.useEffect(() => fetchExpenses(), [chartRef]);
+    }, [chartRef]);
 
     return (
         // Response chart: https://www.chartjs.org/docs/latest/general/responsive.html#important-note

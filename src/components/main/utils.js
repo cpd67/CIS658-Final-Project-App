@@ -1,5 +1,3 @@
-export const apiUrl = "http://localhost:3001";
-
 export const transformExpenseData = expenses => {
     const year = new Date().getFullYear();
 

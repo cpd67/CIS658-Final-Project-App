@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory } from 'react-router-dom';
-import { apiUrl } from '../main/utils';
+import API from '../main/API';
 
 export const SignupForm = props => {
     const { onSubmit } = props;
@@ -20,15 +20,7 @@ export const SignupForm = props => {
             <h1>Sign up</h1>
             <Formik initialValues={initialValues}
                     onSubmit={(values, formikHelpers) => {
-                        fetch(`${apiUrl}/users`, {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json;charset=UTF-8'
-                            },
-                            credentials: 'include',
-                            body: JSON.stringify(values)
-                        }).then(res => res.json()).then(data => {
+                        API.signupUser(values).then(data => {
                             if(data.user) {
                                 onSubmit(data.user);
                                 history.push("/");
