@@ -1,4 +1,6 @@
 import * as React from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
 import { Expenses } from './components/main/Expenses';
@@ -10,6 +12,7 @@ import { ExpenseChart } from './components/main/ExpenseChart';
 import { RouteNotFound } from './components/main/RouteNotFound';
 import API from './components/main/API';
 
+// https://stackoverflow.com/questions/54843302/reactjs-bootstrap-navbar-and-routing-not-working-together
 export const App = props => {
   const [user, setUser] = React.useState({});
 
@@ -55,65 +58,59 @@ export const App = props => {
   return (
     <Router>
       <div className="container-fluid">
-        {typeof user.id !== 'undefined' ? (
-          <>
-            <nav className="navbar navbar-expand navbar-dark bg-success">
-              <Link className="navbar-brand" to="/">Money Trail</Link>
-              <ul className="navbar-nav">
-                {routes.map((route, index) =>
-                  <li className="nav-item" key={index}>
-                    <Link to={route.path} className="nav-link">{route.label}</Link>
-                  </li>
+          <Navbar collapseOnSelect expand="lg" bg="success" variant="dark">
+            <Navbar.Brand as={Link} to={"/"}>Money Trail</Navbar.Brand>
+            <Navbar.Toggle aria-controls="money-trail-nav" />
+            <Navbar.Collapse id="money-trail-nav">
+              <Nav className="mr-auto">
+                {/* Show routes based off whether or not we have a user */}
+                {typeof user.id !== 'undefined' ? routes.map((route, index) => <Nav.Link key={index} as={Link} to={route.path}>{route.label}</Nav.Link>)
+                : (<>
+                    <Nav.Link key={0} as={Link} to={'/login'}>Log in</Nav.Link>
+                    <Nav.Link key={1} as={Link} to={'/signup'}>Sign up</Nav.Link>
+                    </>
                   )
                 }
-              </ul>
-            </nav>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          {typeof user.id !== 'undefined' ? (
             <Switch>
-              {routes.map((route, index) =>
-                <Route
-                  key={index}
-                  path={route.path}
-                  exact={route.exact}
-                  children={route.content}
-                />
-              )}
-              <Route path="*" children={<RouteNotFound />} />
+                {routes.map((route, index) =>
+                  <Route
+                    key={100 + index}
+                    path={route.path}
+                    exact={route.exact}
+                    children={route.content}
+                  />
+                )
+                }
+                <Route path="*" children={<RouteNotFound />} />
             </Switch>
-          </>
-          ) : (
-            <>
-              <nav className="navbar navbar-expand navbar-dark bg-success">
-                <Link className="navbar-brand" to="/">Money Trail</Link>
-                <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <Link to={'/login'} className="nav-link">Log in</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to={'/signup'} className="nav-link">Sign up</Link>
-                  </li>
-                </ul>
-              </nav>
-              <Switch>
-                  <Route
-                    path="/"
-                    exact={true}
-                    children={<p>Hey there! Log in or sign up using the buttons in the top nav bar.</p>}
-                  />
-                  <Route
-                    path='/login'
-                    exact={true}
-                    children={<LoginForm onSubmit={setUser} />}
-                  />
-                  <Route
-                    path="/signup"
-                    exact={true}
-                    children={<SignupForm onSubmit={setUser} />}
-                  />
-                  <Route path="*" children={<RouteNotFound />} />
-              </Switch>
-            </>
-          )
-        }
+            ) : (
+            <Switch>
+              <Route
+                key={'a'}
+                path="/"
+                exact={true}
+                children={<p>Hey there! Log in or sign up using the buttons in the top nav bar.</p>}
+              />
+              <Route
+                key={'b'}
+                path='/login'
+                exact={true}
+                children={<LoginForm onSubmit={setUser} />}
+              />
+              <Route
+                key={'c'}
+                path="/signup"
+                exact={true}
+                children={<SignupForm onSubmit={setUser} />}
+              />
+              <Route key={'d'} path="*" children={<RouteNotFound />} />
+            </Switch>
+           )
+           }
       </div>
     </Router>
     )

@@ -32,6 +32,7 @@ This project uses the following awesome open-source libraries:
 * [Formik](https://jaredpalmer.com/formik/) - small React component library for building forms.
 * [ChartJS](https://www.chartjs.org/) - Javascript library for creating visually-appealing charts
 * [React Router](https://reacttraining.com/react-router/) - Client-side routing
-* [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - CSS framework for building responsive web apps.
+* [React Bootstrap](https://react-bootstrap.github.io/) - React component library that re-implements Bootstrap's Javascript
+* [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - CSS framework for building responsive web apps
 
 The REST API for this project is hosted here: https://money-trail-api.herokuapp.com/. API code can be found here: https://github.com/cpd67/CIS658-Final-Project-API.
