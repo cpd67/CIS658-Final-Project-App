@@ -13,19 +13,19 @@ export const ExpenseForm = props => {
         }}>
             <div className="form-group">
                 <label htmlFor="name">Expense Name</label>
-                <input type="text" className="form-control" name="name" value={expense.name} onChange={(e) => onEditExpense('name', e.target.value)} required/>
+                <input type="text" className="form-control" id="name" name="name" value={expense.name} onChange={(e) => onEditExpense('name', e.target.value)} required/>
             </div>
             <div className="form-group">
                 <label htmlFor="name">Amount</label>
-                <input type="number" className="form-control" name="amount" value={expense.amount} onChange={(e) => onEditExpense('amount', e.target.value)} required />
+                <input type="number" className="form-control" id="amount" name="amount" value={expense.amount} onChange={(e) => onEditExpense('amount', e.target.value)} required />
             </div>
             <div className="form-group">
                 <label htmlFor="expense_date">Date of Expense</label>
-                <input type="date" className="form-control" name="expense_date" value={expense.expense_date} onChange={(e) => onEditExpense('expense_date', e.target.value)} required />
+                <input type="date" className="form-control" id="expense_date" name="expense_date" value={expense.expense_date} onChange={(e) => onEditExpense('expense_date', e.target.value)} required />
             </div>
             <div className="form-group">
                 <label htmlFor="category">Category</label>
-                <select type="select" className="form-control" name="category" value={expense.category ? expense.category.id : 0}
+                <select type="select" className="form-control" id="category" name="category" value={expense.category ? expense.category.id : 0}
                     onChange={(e) => {
                         // Update Expense Category
                         let newCat = {id: 0, name: "-"}
