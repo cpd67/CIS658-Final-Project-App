@@ -36,3 +36,5 @@ This project uses the following awesome open-source libraries:
 * [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - CSS framework for building responsive web apps
 
 The REST API for this project is hosted here: https://money-trail-api.herokuapp.com/. API code can be found here: https://github.com/cpd67/CIS658-Final-Project-API.
+
+The following resource was helpful in deploying this app: https://blog.heroku.com/deploying-react-with-zero-configuration

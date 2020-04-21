@@ -12,7 +12,12 @@ import { ExpenseChart } from './components/main/ExpenseChart';
 import { RouteNotFound } from './components/main/RouteNotFound';
 import API from './components/main/API';
 
-// https://stackoverflow.com/questions/54843302/reactjs-bootstrap-navbar-and-routing-not-working-together
+/**
+ * Main entrypoint of the React app.
+ *
+ * The following resources were helpful in getting navigation working:
+ * https://stackoverflow.com/questions/54843302/reactjs-bootstrap-navbar-and-routing-not-working-together
+ */
 export const App = props => {
   const [user, setUser] = React.useState({});
 

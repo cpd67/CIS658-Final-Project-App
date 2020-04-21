@@ -1,4 +1,3 @@
-// https://blog.heroku.com/deploying-react-with-zero-configuration
 export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://money-trail-api.herokuapp.com' : "http://localhost:3001";
 
 /**
@@ -6,6 +5,7 @@ export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://money-tra
  *
  * The following resource was helpful in writing this class:
  * https://github.com/kurmasz-SampleCode/CIS371-SampleCode/blob/master/react-blog-complete/src/API.jsx
+ *
  */
 export default class API {
     // Get Expenses for a User
