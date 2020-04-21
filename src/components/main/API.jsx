@@ -3,7 +3,10 @@ export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://money-tra
 
 export default class API {
     static fetchExpenses(user) {
-        return fetch(`${apiUrl}/users/${user.id}/expenses`).then(res => res.json());
+        return fetch(`${apiUrl}/users/${user.id}/expenses`, {
+            method: 'GET',
+            credentials: 'include'
+        }).then(res => res.json());
     }
 
     static createExpense(user, newExpense) {
@@ -62,7 +65,10 @@ export default class API {
     };
 
     static fetchCategories(user) {
-        return fetch(`${apiUrl}/users/${user.id}/categories`).then(res => res.json());
+        return fetch(`${apiUrl}/users/${user.id}/categories`, {
+            method: 'GET',
+            credentials: 'include'
+        }).then(res => res.json());
     }
 
     static createCategory(user, newCategory) {
