@@ -25,7 +25,7 @@ export const App = props => {
     {
       path: "/",
       exact: true,
-      content: () => <p>Welcome! Click on the links above to view your information.</p>
+      content: () => <p className="home-page-text">Welcome! Click on the links above to view your information.</p>
     },
     {
       label: "Expenses",
@@ -98,7 +98,7 @@ export const App = props => {
                 key={'a'}
                 path="/"
                 exact={true}
-                children={<p>Hey there! Log in or sign up using the buttons in the top nav bar.</p>}
+                children={<p className="home-page-text">Hey there! Log in or sign up using the buttons in the top nav bar.</p>}
               />
               <Route
                 key={'b'}
