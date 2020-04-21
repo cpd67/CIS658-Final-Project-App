@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+/**
+ * Display a form for allowing the creation or editing of an Expense.
+ */
 export const ExpenseForm = props => {
     const { expense, onEditExpense, onSubmit, categories, onClear } = props;
 

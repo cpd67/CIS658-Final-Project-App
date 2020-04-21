@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+/**
+ * Display a form for allowing the creation or editing of a Category.
+ */
 export const CategoryForm = props => {
     const { category, onSubmit, onEditCategory, onClear } = props;
 

@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import API from '../main/API';
 
+/**
+ * Display a form for allowing Users to log into their account.
+ */
 export const LoginForm = props => {
     const { onSubmit } = props;
     const history = useHistory();
