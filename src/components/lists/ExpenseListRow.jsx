@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+/**
+ * Display details about a particular Expense.
+ */
 export const ExpenseListRow = props => {
     const { expense, onEdit, onDelete } = props;
 

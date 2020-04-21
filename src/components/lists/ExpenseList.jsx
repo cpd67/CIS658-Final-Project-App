@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { ExpenseListRow } from './ExpenseListRow';
 
+/**
+ * Display a list of Expenses with edit & delete buttons.
+ */
 export const ExpenseList = props => {
     const { expenses, onEdit, onDelete } = props;
 

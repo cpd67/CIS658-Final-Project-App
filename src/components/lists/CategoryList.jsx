@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { CategoryListRow } from './CategoryListRow';
 
+/**
+ * Display a list of Categories with edit & delete buttons.
+ */
 export const CategoryList = props => {
     const { categories, onEdit, onDelete } = props;
 

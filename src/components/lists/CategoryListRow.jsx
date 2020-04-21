@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+/**
+ * Display details about a particular Category.
+ */
 export const CategoryListRow = props => {
     const { category, onEdit, onDelete } = props;
 
