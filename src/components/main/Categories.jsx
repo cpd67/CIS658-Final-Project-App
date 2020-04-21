@@ -3,6 +3,14 @@ import API from '../main/API';
 import { CategoryForm } from '../forms/CategoryForm';
 import { CategoryList } from '../lists/CategoryList';
 
+/**
+ * Display a list of Categories for the currently logged-in User.
+ *
+ * Show form for creating, editing Categories.
+ *
+ * The following resources were helpful when writing this component:
+ * https://github.com/kurmasz-SampleCode/CIS371-SampleCode/blob/master/react-blog-complete/src/components/Authors.jsx
+ */
 export const Categories = props => {
     const { user } = props;
     const defaultCategory = {name: ""}

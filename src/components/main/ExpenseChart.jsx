@@ -3,8 +3,14 @@ import Chart from "chart.js";
 import { transformExpenseData } from './utils';
 import API from './API';
 
-// https://blog.bitsrc.io/customizing-chart-js-in-react-2199fa81530a
-// https://stackoverflow.com/questions/54620698/whats-the-difference-between-useref-and-createref
+/**
+ * Display a Chart of the currently logged-in User's yearly Expenses.
+ *
+ * The following resources were helpful when writing this component:
+ * https://blog.bitsrc.io/customizing-chart-js-in-react-2199fa81530a
+ * https://stackoverflow.com/questions/54620698/whats-the-difference-between-useref-and-createref
+ * https://www.chartjs.org/docs/latest/general/responsive.html#important-note
+ */
 export const ExpenseChart = props => {
     const { user } = props;
     const chartRef = React.useRef(null);
@@ -44,7 +50,6 @@ export const ExpenseChart = props => {
     }, [chartRef]);
 
     return (
-        // Response chart: https://www.chartjs.org/docs/latest/general/responsive.html#important-note
         <div className="chart-container">
             <canvas id="expenseChart" ref={chartRef}></canvas>
         </div>

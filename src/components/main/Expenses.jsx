@@ -3,6 +3,14 @@ import { ExpenseList } from '../lists/ExpenseList';
 import { ExpenseForm } from '../forms/ExpenseForm';
 import API from '../main/API';
 
+/**
+ * Display a list of Expenses for the currently logged-in User.
+ *
+ * Show form for creating, editing Expenses.
+ *
+ * The following resources were helpful when writing this component:
+ * https://github.com/kurmasz-SampleCode/CIS371-SampleCode/blob/master/react-blog-complete/src/components/Authors.jsx
+ */
 export const Expenses = props => {
     const { user } = props;
     const [expensesList, setExpensesList] = React.useState([]);
@@ -11,7 +19,6 @@ export const Expenses = props => {
     const [formMode, setFormMode] = React.useState('new');
     const [categories, setCategories] = React.useState([]);
 
-    // Get expenses for user
     React.useEffect(() => {
         API.fetchExpenses(user).then(data => {
             setExpensesList(data);

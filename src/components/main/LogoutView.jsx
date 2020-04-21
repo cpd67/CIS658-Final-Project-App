@@ -2,6 +2,9 @@ import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import API from './API';
 
+/**
+ * Display a warning asking the User if they wish to log out.
+ */
 export const LogoutView = props => {
     const { handleLogout } = props;
     const history = useHistory();

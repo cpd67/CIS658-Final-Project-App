@@ -1,3 +1,9 @@
+/**
+ * Transform Expense data into a format ChartJS can understand.
+ *
+ * The following resources were helpful when writing this function:
+ * https://stackoverflow.com/questions/1643320/get-month-name-from-date
+ */
 export const transformExpenseData = expenses => {
     const year = new Date().getFullYear();
 
@@ -11,8 +17,6 @@ export const transformExpenseData = expenses => {
                         }
     for(let i = 0; i < yearExpenses.length; i++) {
         let expense = yearExpenses[i];
-
-        // https://stackoverflow.com/questions/1643320/get-month-name-from-date
         let expenseDate = new Date(expense.expense_date);
         let month = expenseDate.toLocaleString('default', {month: 'short'});
         transformedData[month] += expense.amount;
