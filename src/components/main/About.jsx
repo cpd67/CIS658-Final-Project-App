@@ -2,7 +2,7 @@ import * as React from 'react';
 
 export const About = props => {
     return (
-        <div className="row">
+        <div className="row about-page-text">
             <div className="col-md-7">
                 <h3>Welcome to Money Trail!</h3>
                 <p>In here, you can add, view, and track your daily expenses. 

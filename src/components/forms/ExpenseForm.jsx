@@ -17,6 +17,7 @@ export const ExpenseForm = props => {
             </div>
             <div className="form-group">
                 <label htmlFor="name">Amount</label>
+                {/* https://stackoverflow.com/questions/19011861/is-there-a-float-input-type-in-html5 */}
                 <input type="number" step="0.01" className="form-control" id="amount" name="amount" value={expense.amount} onChange={(e) => onEditExpense('amount', e.target.value)} required />
             </div>
             <div className="form-group">
