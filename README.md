@@ -28,13 +28,17 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ## Developers
+The web app is hosted on Heroku and can be found [here](https://money-trail-app.herokuapp.com/). [The following resource](https://blog.heroku.com/deploying-react-with-zero-configuration) was helpful in deploying this app.
+
 This project uses the following awesome open-source libraries:
-* [Formik](https://jaredpalmer.com/formik/) - small React component library for building forms.
+* [Formik](https://jaredpalmer.com/formik/) - Small React component library for building forms.
 * [ChartJS](https://www.chartjs.org/) - Javascript library for creating visually-appealing charts
 * [React Router](https://reacttraining.com/react-router/) - Client-side routing
 * [React Bootstrap](https://react-bootstrap.github.io/) - React component library that re-implements Bootstrap's Javascript
 * [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - CSS framework for building responsive web apps
+* [Jest](https://jestjs.io/) - Unit testing
+* [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) - Provides utilities for testing React components
+* Selenium & Cucumber - E2E testing
 
-The REST API for this project is hosted here: https://money-trail-api.herokuapp.com/. API code can be found here: https://github.com/cpd67/CIS658-Final-Project-API.
+The REST API for this project is hosted [here](https://money-trail-api.herokuapp.com/). Information about the API & code can be found [here](https://github.com/cpd67/CIS658-Final-Project-API).
 
-The following resource was helpful in deploying this app: https://blog.heroku.com/deploying-react-with-zero-configuration
