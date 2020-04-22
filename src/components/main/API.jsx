@@ -51,9 +51,6 @@ export default class API {
                 return res.json();
             } else if(res.status === 401) {
                 throw new Error(`You are not allowed to do that.`);
-            } else if(res.status === 422) {
-                const data = res.json();
-                throw new Error(Object.values(res.errors).join("\n"));
             } else {
                 throw new Error(`Unable to create Expense, received a ${res.status} code.`);
             }
@@ -140,9 +137,6 @@ export default class API {
                 return res.json();
             } else if(res.status === 401) {
                 throw new Error(`You are not allowed to do that.`);
-            } else if(res.status === 422) {
-                const data = res.json();
-                throw new Error(Object.values(data.errors).join("\n"));
             } else {
                 throw new Error(`Unable to create Category, received a ${res.status} code.`);
             }
