@@ -7,7 +7,7 @@ export const ExpenseForm = props => {
     const { expense, onEditExpense, onSubmit, categories, onClear } = props;
 
     return (
-        <form onSubmit={(e) => {
+        <form id="expense-form" onSubmit={(e) => {
             e.preventDefault();
             onSubmit(expense);
         }}>

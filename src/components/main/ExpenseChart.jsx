@@ -43,7 +43,8 @@ export const ExpenseChart = props => {
                 type: "line",
                 data: chartData,
                 options: {
-                    responsive: true
+                    responsive: true,
+                    layout: 50
                 }
             });
         });

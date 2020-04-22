@@ -16,4 +16,3 @@ Then('I should see home page text', async() => {
         expect(await elements[0].getText()).toEqual('Hey there! Log in or sign up using the buttons in the top nav bar.');
     });
 });
-

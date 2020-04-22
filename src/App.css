@@ -3,3 +3,16 @@
   height: 40vh;
   width: 80vw;
 }
+
+/* https://css-tricks.com/snippets/css/fixed-footer/ */
+#footer-nav {
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 40px;
+  width: 100%;
+}
+
+#expense-form {
+  margin-bottom: 15%;
+}
