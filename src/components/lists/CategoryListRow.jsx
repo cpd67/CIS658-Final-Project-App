@@ -12,7 +12,9 @@ export const CategoryListRow = props => {
             <td>
                 <div className="btn-group btn-group-sm">
                     <button className="btn btn-secondary" onClick={(e) => onEdit(category)}>Edit</button>
-                    <button className="btn btn-danger" onClick={(e) => onDelete(category.id)}>Delete</button>
+                    {
+                        category.expenses.length > 0 ? <></> : <button className="btn btn-danger" onClick={((e) => onDelete(category.id))}>Delete</button>
+                    }
                 </div>
             </td>
         </tr>
