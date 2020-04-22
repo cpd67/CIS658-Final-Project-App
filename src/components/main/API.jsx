@@ -13,7 +13,15 @@ export default class API {
         return fetch(`${apiUrl}/users/${user.id}/expenses`, {
             method: 'GET',
             credentials: 'include'
-        }).then(res => res.json());
+        }).then(res => {
+            if(res.ok) {
+                return res.json();
+            } else if(res.status === 401) {
+                throw new Error(`You are not allowed to do that.`);
+            } else {
+                throw new Error(`Unable to fetch Expenses, received a ${res.status} code.`);
+            }
+        })
     }
 
     // Create new expense
@@ -38,7 +46,18 @@ export default class API {
             },
             credentials: "include",
             body: JSON.stringify(newData)
-        }).then(res => res.json());
+        }).then(res => {
+            if(res.ok) {
+                return res.json();
+            } else if(res.status === 401) {
+                throw new Error(`You are not allowed to do that.`);
+            } else if(res.status === 422) {
+                const data = res.json();
+                throw new Error(Object.values(res.errors).join("\n"));
+            } else {
+                throw new Error(`Unable to create Expense, received a ${res.status} code.`);
+            }
+        });
     }
 
     // Update an Expense
@@ -63,7 +82,15 @@ export default class API {
             },
             credentials: "include",
             body: JSON.stringify(updateData)
-        }).then(res => res.text());
+        }).then(res => {
+            if(res.ok && res.status === 204) {
+                return res.text();
+            } else if(res.status === 401) {
+                throw new Error(`You are not allowed to do that.`);
+            } else {
+                throw new Error(`Unable to update Expense, received a ${res.status} code.`);
+            }
+        });
     };
 
     // Delete an Expense
@@ -71,7 +98,15 @@ export default class API {
         return fetch(`${apiUrl}/users/${user.id}/expenses/${expenseId}`, {
             method: "DELETE",
             credentials: "include"
-        }).then(res => res.text());
+        }).then(res => {
+            if(res.ok && res.status === 204) {
+                return res.text();
+            } else if(res.status === 401) {
+                throw new Error(`You are not allowed to do that.`);
+            } else {
+                throw new Error(`Unable to delete Expense, received a ${res.status} code.`);
+            }
+        });
     };
 
     // Get Categories for a User
@@ -79,7 +114,15 @@ export default class API {
         return fetch(`${apiUrl}/users/${user.id}/categories`, {
             method: 'GET',
             credentials: 'include'
-        }).then(res => res.json());
+        }).then(res => {
+            if(res.ok) {
+                return res.json();
+            } else if(res.status === 401) {
+                throw new Error(`You are not allowed to do that.`);
+            } else {
+                throw new Error(`Unable to fetch Categories, received a ${res.status} code.`);
+            }
+        });
     }
 
     // Create a Category
@@ -92,7 +135,18 @@ export default class API {
             },
             credentials: 'include',
             body: JSON.stringify(newCategory)
-        }).then(res => res.json());
+        }).then(res => {
+            if(res.ok) {
+                return res.json();
+            } else if(res.status === 401) {
+                throw new Error(`You are not allowed to do that.`);
+            } else if(res.status === 422) {
+                const data = res.json();
+                throw new Error(Object.values(data.errors).join("\n"));
+            } else {
+                throw new Error(`Unable to create Category, received a ${res.status} code.`);
+            }
+        });
     }
     
     // Update a Category
@@ -105,7 +159,15 @@ export default class API {
             },
             credentials: 'include',
             body: JSON.stringify(updatedCategory)
-        }).then(res => res.text());
+        }).then(res => {
+            if(res.ok && res.status === 204) {
+                return res.text();
+            } else if(res.status === 401) {
+                throw new Error(`You are not allowed to do that.`);
+            } else {
+                throw new Error(`Unable to update Category, received a ${res.status} code.`);
+            }
+        });
     };
 
     // Delete a Category
@@ -113,7 +175,15 @@ export default class API {
         return fetch(`${apiUrl}/users/${user.id}/categories/${catId}`, {
             method: "DELETE",
             credentials: "include"
-        }).then(res => res.text());
+        }).then(res => {
+            if(res.ok && res.status === 204) {
+                return res.text();
+            } else if(res.status === 401) {
+                throw new Error(`You are not allowed to do that.`);
+            } else {
+                throw new Error(`Unable to delete Category, received a ${res.status} code.`);
+            }
+        });
     };
 
     // Log a User in
@@ -134,7 +204,13 @@ export default class API {
         return fetch(`${apiUrl}/logout`, {
             method: 'DELETE',
             credentials: 'include'
-        }).then(res => res.json());
+        }).then(res => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                throw new Error(`Logout failed. Got back ${res.status} code.`);
+            }
+        });
     }
 
     // Sign a User up
@@ -155,6 +231,12 @@ export default class API {
         return fetch(`${apiUrl}/logged_in`, {
           method: 'GET',
           credentials: 'include'
-        }).then(res => res.json());
+        }).then(res => {
+            if(res.ok) {
+                return res.json();
+            } else {
+                throw new Error(`Cannot get login status. Got back ${res.status} code.`);
+            }
+        });
     }
 }

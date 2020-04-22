@@ -17,7 +17,7 @@ export const ExpenseForm = props => {
             </div>
             <div className="form-group">
                 <label htmlFor="name">Amount</label>
-                <input type="number" className="form-control" id="amount" name="amount" value={expense.amount} onChange={(e) => onEditExpense('amount', e.target.value)} required />
+                <input type="number" step="0.01" className="form-control" id="amount" name="amount" value={expense.amount} onChange={(e) => onEditExpense('amount', e.target.value)} required />
             </div>
             <div className="form-group">
                 <label htmlFor="expense_date">Date of Expense</label>

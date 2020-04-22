@@ -11,6 +11,7 @@ import { SignupForm } from './components/forms/SignupForm';
 import { LogoutView } from './components/main/LogoutView';
 import { ExpenseChart } from './components/main/ExpenseChart';
 import { RouteNotFound } from './components/main/RouteNotFound';
+import { ErrorMessage } from './components/main/ErrorMessage';
 import API from './components/main/API';
 
 /**
@@ -21,6 +22,7 @@ import API from './components/main/API';
  */
 export const App = props => {
   const [user, setUser] = React.useState({});
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   const routes = [
     {
@@ -63,6 +65,8 @@ export const App = props => {
       if(data.logged_in) {
         setUser(data.user);
       }
+    }).catch(message => {
+      setErrorMessage(message);
     })
   }, []);
 
@@ -86,6 +90,7 @@ export const App = props => {
         </Navbar.Collapse>
       </Navbar>
       <div className="container-fluid">
+        {errorMessage ? <ErrorMessage message={errorMessage} /> : <></>}
         {typeof user.id !== 'undefined' ? (
           <Switch>
               {routes.map((route, index) =>

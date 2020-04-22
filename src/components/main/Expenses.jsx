@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ExpenseList } from '../lists/ExpenseList';
 import { ExpenseForm } from '../forms/ExpenseForm';
+import { ErrorMessage } from '../main/ErrorMessage';
 import API from '../main/API';
 
 /**
@@ -18,10 +19,13 @@ export const Expenses = props => {
     const [currentExpense, setCurrentExpense] = React.useState(defaultExpense);
     const [formMode, setFormMode] = React.useState('new');
     const [categories, setCategories] = React.useState([]);
+    const [errorMessage, setErrorMessage] = React.useState("");
 
     React.useEffect(() => {
         API.fetchExpenses(user).then(data => {
             setExpensesList(data);
+        }).catch(message => {
+            setErrorMessage(message);
         })
     }, [expensesList.length]);
     React.useEffect(() => {
@@ -29,6 +33,8 @@ export const Expenses = props => {
             if(data) {
                 setCategories(data);
             }
+        }).catch(message => {
+            setErrorMessage(message);
         })
     }, [categories.length]);
 
@@ -40,18 +46,18 @@ export const Expenses = props => {
                 } else {
                     setExpensesList([...expensesList, expenseInfo]);
                 }
-            });
+            }).catch(message => {
+                setErrorMessage(message);
+            })
         } else {
             API.updateExpense(user, expenseInfo).then(data => {
-                if(!data) {
-                    let newExpensesList = [...expensesList];
-                    let expenseIndex = expensesList.findIndex((expense) => expense.id === currentExpense.id);
-                    newExpensesList[expenseIndex] = currentExpense;
-                    setExpensesList(newExpensesList);
-                } else {
-                    console.log("Failed to update Expense because: " + data);
-                }
-            });
+                let newExpensesList = [...expensesList];
+                let expenseIndex = expensesList.findIndex((expense) => expense.id === currentExpense.id);
+                newExpensesList[expenseIndex] = currentExpense;
+                setExpensesList(newExpensesList);
+            }).catch(message => {
+                setErrorMessage(message);
+            })
         }
     }
 
@@ -59,27 +65,29 @@ export const Expenses = props => {
         let newExpense = { ...currentExpense };
         newExpense[field] = value;
         setCurrentExpense(newExpense);
+        setErrorMessage("");
     }
     const onEdit = expense => {
         setFormMode('edit');
         setCurrentExpense(expense);
+        setErrorMessage("");
     }
     const onDelete = (expenseId) => {
         API.deleteExpense(user, expenseId).then(data => {
-            if(!data) {
-                setExpensesList(expensesList.filter((expense) => expense.id !== expenseId));
-            } else {
-                console.log("Failed to delete Expense because: " + data);
-            }
+            setExpensesList(expensesList.filter((expense) => expense.id !== expenseId));
+        }).catch(message => {
+            setErrorMessage(message);
         });
     }
     const onClear = () => {
         setFormMode('new');
         setCurrentExpense(defaultExpense);
+        setErrorMessage("");
     }
 
     return (
         <>
+            <ErrorMessage message={errorMessage} />
             <ExpenseList expenses={expensesList} onEdit={onEdit} onDelete={onDelete} />
             <ExpenseForm expense={currentExpense} categories={categories} onSubmit={onSubmit} onEditExpense={onEditExpense} onClear={onClear} />
         </>

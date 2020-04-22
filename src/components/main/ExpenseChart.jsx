@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Chart from "chart.js";
+import { ErrorMessage } from '../main/ErrorMessage'
 import { transformExpenseData } from './utils';
 import API from './API';
 
@@ -13,6 +14,7 @@ import API from './API';
  */
 export const ExpenseChart = props => {
     const { user } = props;
+    const [errorMessage, setErrorMessage] = React.useState("");
     const chartRef = React.useRef(null);
 
     React.useEffect(() => {
@@ -33,7 +35,13 @@ export const ExpenseChart = props => {
                     datasets: [
                         {
                             label: "Expenses",
-                            data: Object.values(expenseData)
+                            data: Object.values(expenseData),
+                            backgroundColor: 'blue'
+                        },
+                        {
+                            label: "Expenses 2",
+                            data: [20.00, 40.00],
+                            backgroundColor: 'red'
                         }
                     ]
                 }
@@ -47,11 +55,14 @@ export const ExpenseChart = props => {
                     layout: 50
                 }
             });
+        }).catch(message => {
+            setErrorMessage(message);
         });
     }, [chartRef]);
 
     return (
         <div className="chart-container">
+            <ErrorMessage message={errorMessage} />
             <canvas id="expenseChart" ref={chartRef}></canvas>
         </div>
     );

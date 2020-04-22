@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import { ErrorMessage } from '../main/ErrorMessage';
 import API from '../main/API';
 
 /**
@@ -8,21 +9,23 @@ import API from '../main/API';
  */
 export const LoginForm = props => {
     const { onSubmit } = props;
+    const [submitErrors, setSubmitErrors] = React.useState("");
     const history = useHistory();
     const initialValues = {username: "", password: ""}
 
     return (
         <>
+            <ErrorMessage message={submitErrors} />
             <h1>Log in</h1>
             <Formik
                 initialValues={initialValues}
                 onSubmit={(values, formikHelpers) => {
                     API.loginUser(values).then(data => {
-                        if(data.errors) {
-                            console.log(data.errors);
-                        } else {
+                        if(!data.errors) {
                             onSubmit(data.user);
                             history.push("/");
+                        } else {
+                            setSubmitErrors(Object.values(data.errors));
                         }
                     });
                     formikHelpers.setSubmitting(false);

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import API from '../main/API';
+import { ErrorMessage } from './ErrorMessage';
 import { CategoryForm } from '../forms/CategoryForm';
 import { CategoryList } from '../lists/CategoryList';
 
@@ -17,10 +18,13 @@ export const Categories = props => {
     const [currentCategory, setCurrentCategory] = React.useState(defaultCategory);
     const [formMode, setFormMode] = React.useState('new');
     const [categoriesList, setCategoriesList] = React.useState([]);
+    const [errorMessage, setErrorMessage] = React.useState("");
 
     React.useEffect(() => {
         API.fetchCategories(user).then(data => {
             setCategoriesList(data);
+        }).catch(message => {
+            setErrorMessage(message);
         });
     }, [categoriesList.length]);
 
@@ -32,18 +36,18 @@ export const Categories = props => {
                 } else {
                     setCategoriesList([...categoriesList, categoryInfo]);
                 }
-            })
+            }).catch(message => {
+                setErrorMessage(message);
+            });
         } else {
             API.updateCategory(user, categoryInfo).then(data => {
-                if(!data) {
-                    let newCategoriesList = [...categoriesList];
-                    let catIndex = categoriesList.findIndex((cat) => cat.id === currentCategory.id);
-                    newCategoriesList[catIndex] = currentCategory;
-                    setCategoriesList(newCategoriesList);
-                } else {
-                    console.log("Failed to update Category because: " + data);
-                }
-            })
+                let newCategoriesList = [...categoriesList];
+                let catIndex = categoriesList.findIndex((cat) => cat.id === currentCategory.id);
+                newCategoriesList[catIndex] = currentCategory;
+                setCategoriesList(newCategoriesList);
+            }).catch(message => {
+                setErrorMessage(message);
+            });
         }
     }
 
@@ -51,28 +55,30 @@ export const Categories = props => {
         let newCategory = { ...currentCategory };
         newCategory[field] = value;
         setCurrentCategory(newCategory);
+        setErrorMessage("");
     }
 
     const onEdit = category => {
         setFormMode('edit');
+        setErrorMessage("");
         setCurrentCategory(category);
     }
     const onDelete = catId => {
         API.deleteCategory(user, catId).then(data => {
-            if(!data) {
-                setCategoriesList(categoriesList.filter((cat) => cat.id !== catId));
-            } else {
-                console.log("Failed to delete Category because: " + data);
-            }
+            setCategoriesList(categoriesList.filter((cat) => cat.id !== catId));
+        }).catch(message => {
+            setErrorMessage(message);
         });
     }
     const onClear = () => {
         setFormMode('new');
+        setErrorMessage("");
         setCurrentCategory(defaultCategory);
     }
 
     return (
         <>
+            <ErrorMessage message={errorMessage} />
             <CategoryList categories={categoriesList} onEdit={onEdit} onDelete={onDelete} />
             <CategoryForm category={currentCategory} onSubmit={onSubmit} onEditCategory={onEditCategory} onClear={onClear} />
         </>
