@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
 import { Expenses } from './components/main/Expenses';
@@ -52,12 +53,6 @@ export const App = props => {
       path: "/about",
       content: () => <About />
     },
-    {
-      label: "Logout",
-      path: "/log-out",
-      exact: true,
-      content: () => <LogoutView handleLogout={() => setUser({})}/>
-    }
   ];
 
   React.useEffect(() => {
@@ -78,7 +73,14 @@ export const App = props => {
         <Navbar.Collapse id="money-trail-nav">
           <Nav className="mr-auto">
             {/* Show routes based off whether or not we have a user */}
-            {typeof user.id !== 'undefined' ? routes.map((route, index) => <Nav.Link key={index} as={Link} to={route.path}>{route.label}</Nav.Link>)
+            {typeof user.id !== 'undefined' ? (
+              <>
+                {routes.map((route, index) => <Nav.Link key={index} as={Link} to={route.path}>{route.label}</Nav.Link>)}
+                <NavDropdown title={user.first_name + " " + user.last_name} id="nav-user-dropdown">
+                  <NavDropdown.Item key={"nav-user"} as={Link} to={'/log-out'}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              </>
+            )
             : (<>
                 <Nav.Link key={0} as={Link} to={'/login'}>Log in</Nav.Link>
                 <Nav.Link key={1} as={Link} to={'/signup'}>Sign up</Nav.Link>
@@ -102,6 +104,7 @@ export const App = props => {
                 />
               )
               }
+              <Route path="/log-out" exact={true} children={<LogoutView handleLogout={() => setUser({})}/>} />
               <Route path="*" children={<RouteNotFound />} />
           </Switch>
           ) : (
