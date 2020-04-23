@@ -35,13 +35,7 @@ export const ExpenseChart = props => {
                     datasets: [
                         {
                             label: "Expenses",
-                            data: Object.values(expenseData),
-                            backgroundColor: 'blue'
-                        },
-                        {
-                            label: "Expenses 2",
-                            data: [20.00, 40.00],
-                            backgroundColor: 'red'
+                            data: Object.values(expenseData)
                         }
                     ]
                 }
